@@ -6,6 +6,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.colors as mcolors
+import pandas as pd
 
 # Añadir un título en la barra lateral
 st.sidebar.markdown("<h1 style='text-align: center; color: black;'>Sheplays Analytics</h1>", unsafe_allow_html=True)
@@ -60,6 +61,65 @@ st.sidebar.write(f"Has seleccionado analizar al equipo: **{equipo_seleccionado}*
 
 # Filtrar eventos solo del equipo seleccionado
 eventos_equipo = eventos[eventos['team'] == equipo_seleccionado]
+
+#-----------------------------RESUMEN 1 ------------------------------------------------------
+
+
+# Función para cargar eventos con caché para optimizar el rendimiento
+@st.cache_data
+def cargar_eventos(partido_id):
+    return sb.events(match_id=partido_id)
+
+# Cargar los eventos del partido seleccionado
+eventos = cargar_eventos(partido_id)
+
+# Filtrar los eventos del primer tiempo (primeros 45 minutos)
+eventos_partido = eventos[eventos['period'] == 1]
+
+# Obtener los equipos que jugaron ese partido
+equipos = eventos_partido['team'].unique()
+
+# Verificar que hay datos suficientes
+if len(equipos) >= 2:
+    # Obtener la lista de jugadores por equipo
+    jugadores_equipo1 = eventos_partido[eventos_partido['team'] == equipos[0]]['player'].unique()
+    jugadores_equipo2 = eventos_partido[eventos_partido['team'] == equipos[1]]['player'].unique()
+
+    # Filtrar las sustituciones (eventos de tipo 'Substitution') que ocurrieron en el primer tiempo
+    cambios_equipo1 = eventos_partido[(eventos_partido['team'] == equipos[0]) & (eventos_partido['type'] == 'Substitution')]
+    cambios_equipo2 = eventos_partido[(eventos_partido['team'] == equipos[1]) & (eventos_partido['type'] == 'Substitution')]
+
+    # Mostrar la información del partido en la app
+    st.header("Resumen 1er tiempo")
+    st.write(f"**Equipos:** {equipos[0]} vs {equipos[1]}")
+
+    # Mostrar los jugadores del primer equipo
+    st.subheader(f"Jugadores del {equipos[0]} en el primer tiempo:")
+    for jugador in jugadores_equipo1:
+        st.write(f"- {jugador}")
+
+    # Mostrar los cambios del primer equipo (si los hubo)
+    if not cambios_equipo1.empty:
+        st.subheader(f"Cambios en el {equipos[0]} en el primer tiempo:")
+        for index, row in cambios_equipo1.iterrows():
+            st.write(f"- {row['player']} fue sustituido por {row['substitution_replacement']} al minuto {row['minute']}")
+    else:
+        st.write(f"No hubo cambios en el {equipos[0]} en el primer tiempo.")
+
+    # Mostrar los jugadores del segundo equipo
+    st.subheader(f"Jugadores del {equipos[1]} en el primer tiempo:")
+    for jugador in jugadores_equipo2:
+        st.write(f"- {jugador}")
+
+    # Mostrar los cambios del segundo equipo (si los hubo)
+    if not cambios_equipo2.empty:
+        st.subheader(f"Cambios en el {equipos[1]} en el primer tiempo:")
+        for index, row in cambios_equipo2.iterrows():
+            st.write(f"- {row['player']} fue sustituido por {row['substitution_replacement']} al minuto {row['minute']}")
+    else:
+        st.write(f"No hubo cambios en el {equipos[1]} en el primer tiempo.")
+else:
+    st.write("No hay datos suficientes para mostrar información sobre este partido.")
 
 # ---------------------------- PRIMER GRÁFICO: GANANCIA DE METROS ----------------------------
 
@@ -242,3 +302,121 @@ plt.title('Expected Goals (xG) por Ubicación de Tiros (Campo Completo - Medici�
 
 # Mostrar el gráfico en Streamlit
 st.pyplot(fig)
+
+st.header("Desglose 1er tiempo")
+
+#--------------------------------------DESGLOSE DEL PRIMER TIEMPO----------------------------------------------
+# Definir coordenadas fijas para las posiciones en formaciones comunes (ejemplo 4-3-3, 4-4-2, etc.)
+def obtener_coordenadas_por_formacion(formacion):
+    formaciones_dict = {
+    433: [(20, 80), (40, 80), (60, 80),   # Delanteros
+          (20, 60), (40, 60), (60, 60),   # Mediocampistas
+          (10, 40), (30, 40), (50, 40), (70, 40), # Defensas
+          (40, 20)],                      # Portero
+    442: [(25, 80), (55, 80),             # Delanteros
+          (10, 60), (30, 60), (50, 60), (70, 60), # Mediocampistas
+          (10, 40), (30, 40), (50, 40), (70, 40), # Defensas
+          (40, 20)],                      # Portero
+    4231: [(40, 85),                      # Delantero (centro)
+           (20, 70), (40, 70), (60, 70),  # Mediocampistas ofensivos (izquierda, centro, derecha)
+           (30, 55), (50, 55),            # Mediocentros defensivos
+           (15, 40), (35, 40), (55, 40), (75, 40),  # Defensas (laterales y centrales)
+           (40, 20)],                      # Portero (centro)
+    41212: [(30, 80), (50, 80),           # Delanteros (izquierda, derecha)
+            (40, 70),                     # Mediocentro ofensivo (centro)
+            (30, 60), (50, 60),           # Mediocentros (izquierda, derecha)
+            (40, 50),                     # Mediocentro defensivo (centro)
+            (20, 40), (60, 40),           # Laterales (izquierdo, derecho)
+            (30, 40), (50, 40),           # Defensas centrales
+            (40, 20)],                     # Portero (centro)
+    3412: [(40, 85),                      # Delantero (centro)
+           (30, 70), (50, 70),            # Mediocentros ofensivos (izquierdo y derecho)
+           (40, 60),                      # Mediocentro defensivo (centro)
+           (20, 65), (60, 65),            # Laterales (izquierdo y derecho)
+           (20, 40), (40, 40), (60, 40),  # Defensas (líbero y centrales)
+           (40, 20)],                      # Portero (centro)
+    352: [(40, 80),                       # Delantero
+          (30, 70), (50, 70),             # Mediocampistas ofensivos
+          (40, 55), (40, 50),             # Laterales
+          (20, 65), (60, 65),             # Defensas
+          (40, 20)],                      # Portero
+    3511: [(40, 80),                      # Delantero
+           (30, 70), (50, 70),            # Mediocampistas ofensivos
+           (40, 55),                      # Mediocentro defensivo
+           (20, 65), (60, 65),            # Laterales
+           (10, 40), (30, 40), (50, 40),  # Defensas
+           (40, 20)],                     # Portero
+    343: [(40, 80),                       # Delantero
+          (30, 70), (50, 70),             # Mediocampistas ofensivos
+          (40, 55),                       # Mediocentro defensivo
+          (20, 65), (60, 65),             # Laterales
+          (10, 40), (30, 40), (50, 40),   # Defensas
+          (40, 20)],                      # Portero
+    4222: [(35, 80), (45, 80),            # Delanteros (izquierdo y derecho)
+           (25, 70), (55, 70),            # Mediocampistas ofensivos (izquierdo y derecho)
+           (35, 60), (45, 60),            # Mediocentros defensivos (izquierdo y derecho)
+           (20, 40), (60, 40),            # Defensas laterales (izquierdo y derecho)
+           (30, 40), (50, 40),            # Defensas centrales (izquierdo y derecho)
+           (40, 20)],                      # Portero (centro)
+    4141: [(40, 80),                      # Delantero
+           (30, 65), (50, 65),            # Mediocampistas ofensivos
+           (40, 55),                      # Mediocentro defensivo
+           (10, 40), (30, 40), (50, 40),  # Defensas
+           (40, 20)],                     # Portero
+     4411: [(40, 85),                      # Delantero (centro)
+           (40, 70),                      # Mediapunta (centro)
+           (20, 65), (60, 65),            # Mediocampistas laterales (izquierdo y derecho)
+           (30, 65), (50, 65),            # Mediocentros (izquierdo y derecho)
+           (20, 40), (60, 40),            # Defensas laterales (izquierdo y derecho)
+           (30, 40), (50, 40),            # Defensas centrales
+           (40, 20)],                      # Portero (centro)
+    451: [(40, 80),                       # Delantero
+          (30, 65), (50, 65), (30, 55), (50, 55),  # Mediocampistas ofensivos
+          (40, 45),                      # Mediocentro defensivo
+          (10, 40), (30, 40), (50, 40),  # Defensas
+          (40, 20)],                      # Portero
+    3421: [(40, 80),                      # Delantero (centro)
+           (30, 70), (50, 70),            # Mediocentros ofensivos (izquierda y derecha)
+           (20, 60), (60, 60),            # Carrileros (izquierdo y derecho)
+           (30, 55), (50, 55),            # Mediocentros (izquierdo y derecho)
+           (20, 40), (40, 40), (60, 40),  # Defensas (líbero y centrales)
+           (40, 20)]                      # Portero
+}
+    return formaciones_dict.get(formacion, None)
+
+# Obtener los eventos de un partido específico
+eventos = sb.events(match_id=partido_id)
+
+# Filtrar los eventos tácticos (parados tácticos)
+cambios_tacticos = eventos[eventos['type'] == 'Tactical Shift']
+
+# Revisar los eventos tácticos para ver cómo cambió la formación
+for index, row in cambios_tacticos.iterrows():
+    minuto = row['minute']  # Minuto del cambio táctico
+    formacion = row['tactics']['formation']  # Formación táctica en ese momento
+    alineacion = row['tactics']['lineup']  # Alineación de jugadores en esa formación
+
+    st.write(f"Minuto {minuto}: Migraron a la formación {formacion}")
+
+    # Obtener coordenadas basadas en la formación
+    posicion_coords = obtener_coordenadas_por_formacion(formacion)
+
+    if posicion_coords:
+        # Crear el campo de fútbol usando mplsoccer
+        pitch = Pitch(pitch_type='statsbomb', line_color='black', pitch_color='#aaddaa')  # Campo verde claro
+        fig, ax = pitch.draw(figsize=(10, 7))
+
+        # Intercambiar las coordenadas para que la orientación sea horizontal
+        x_coords = [pos[1] for pos in posicion_coords]  # Usar y como x
+        y_coords = [pos[0] for pos in posicion_coords]  # Usar x como y
+        
+        # Dibujar los jugadores en el campo basados en las posiciones predefinidas
+        pitch.scatter(x_coords, y_coords, ax=ax, c='blue', s=300, edgecolors='black', linewidth=1.5)
+        
+        # Añadir el título del gráfico con el minuto del cambio táctico
+        ax.set_title(f"Formación {formacion} en el minuto {minuto}", fontsize=15)
+
+        # Mostrar el gráfico en la app de Streamlit
+        st.pyplot(fig)
+    else:
+        st.write(f"No se pudo encontrar una formación predefinida para {formacion}.")
