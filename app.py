@@ -104,7 +104,6 @@ Este gráfico muestra la ganancia de metros hacia la portería rival. Se utiliza
 st.latex(r'''
 \text{ganancia\_metros} = \sqrt{(x_{\text{final}} - x_{\text{inicio}})^2 + (y_{\text{final}} - y_{\text{inicio}})^2}
 ''')
-st.markdown("Esta ecuación se aplica solo cuando la coordenada final en el eje x es mayor que la coordenada inicial en el eje x.")
 
 # Descripción para el gráfico 2
 st.markdown("""
@@ -529,7 +528,7 @@ for index, row in cambios_tacticos.iterrows():
         cbar.set_ticklabels([f'{b} m' for b in bins])
         cbar.set_label('Ganancia de metros hacia la portería por parte del contrincante.' , fontsize=12)
         plt.title('Ganancia de metros hacia la portería por parte del contrincante.', fontsize=14)
-        st.write('El gráfico muestra un mapa de calor que ilustra las zonas donde el equipo contrincante logró avanzar hacia la portería. Las áreas más oscuras representan zonas donde hubo mayor cantidad de metros ganados, indicando las áreas más peligrosas para el equipo seleccionado. El gráfico también incluye una barra de colores para mostrar diferentes rangos de metros ganados.')
+        st.write('El gráfico muestra un mapa de calor que ilustra las zonas donde el equipo contrincante logró avanzar hacia la portería. Las áreas más oscuras representan zonas donde hubo mayor cantidad de metros ganados, indicando las áreas más peligrosas para el equipo seleccionado. El gráfico también incluye una barra de colores para mostrar diferentes rangos de metros ganados, estos datos al momento del ajuste táctico.')
         st.pyplot(fig)
 
         # ******************* Interno 2 ********************
@@ -567,7 +566,7 @@ for index, row in cambios_tacticos.iterrows():
 
         plt.title('Zonas de peligro, direcciones del ataque, al momento del cambio táctico.', fontsize=14)
 
-        st.write('Este gráfico busca representar cómo se distribuyeron los ataques del equipo contrario después de un cambio táctico del equipo seleccionado. Las zonas con mayor densidad de ataques, marcadas por el mapa de calor, indican las áreas donde el equipo rival pudo generar más peligro. Las líneas y etiquetas de distancia añaden una capa de detalle que permite interpretar mejor la relación entre el ataque y la estructura del campo')
+        st.write('Este gráfico busca representar cómo se distribuyeron los ataques del equipo contrario al momento en que se realizo el cambio táctico del equipo seleccionado. Las zonas con mayor densidad de ataques, marcadas por el mapa de calor, indican las áreas donde el equipo rival pudo generar más peligro. Las líneas y etiquetas de distancia añaden una capa de detalle que permite interpretar mejor la relación entre el ataque y la estructura del campo')
 
         st.pyplot(fig)
         
@@ -615,7 +614,7 @@ for index, row in cambios_tacticos.iterrows():
 
         ax.legend(loc='upper right')
         plt.title('Expected Goals (xG) por Ubicación de Tiros (Campo Completo - Medición 60 metros)', fontsize=14)
-        st.write('Este análisis es útil para identificar las zonas del campo donde se originan los tiros más peligrosos, basados en los valores de xG. Específicamente, se puede observar si los cambios tácticos influyeron en la peligrosidad de las áreas de ataque del equipo o de su oponente. Las líneas de medición y etiquetas agregan contexto espacial, ayudando a comprender la relación entre las ubicaciones de los tiros y el campo.')
+        st.write('Este análisis es útil para identificar las zonas del campo donde se originan los tiros más peligrosos hasta el momento del ajuste táctico, basados en los valores de xG. Específicamente, Las líneas de medición y etiquetas agregan contexto espacial, ayudando a comprender la relación entre las ubicaciones de los tiros y el campo.')
         st.pyplot(fig)
         
         #*************+Interno************
@@ -720,7 +719,7 @@ cbar.set_ticklabels([f'{b} m' for b in bins])
 cbar.set_label('Ganancia de metros hacia portería (rango) por parte del contrincante.', fontsize=12)
 
 plt.title('Ganancia de metros hacia portería (rango) de parte del contricante', fontsize=14)
-st.write('El gráfico muestra un mapa de calor que ilustra las zonas donde el equipo contrincante logró avanzar hacia la portería. Las áreas más oscuras representan zonas donde hubo mayor cantidad de metros ganados, indicando las áreas más peligrosas para el equipo seleccionado. El gráfico también incluye una barra de colores para mostrar diferentes rangos de metros ganados.')
+st.write('El gráfico muestra un mapa de calor que ilustra las zonas donde el equipo contrincante logró avanzar hacia la portería. Las áreas más oscuras representan zonas donde hubo mayor cantidad de metros ganados, indicando las áreas más peligrosas para el equipo seleccionado. El gráfico también incluye una barra de colores para mostrar diferentes rangos de metros ganados. Esto al finalizar el primer tiempo.')
 st.pyplot(fig)
 
 # ---------------------------- SEGUNDO GRÁFICO: MAPA DE CALOR DIRECCIÓN UNIFICADA ----------------------------
@@ -759,7 +758,7 @@ for i in range(10, 40, 10):
     ax.text(2, 40 - i, f'{i}m', color='blue', fontsize=10)
 
 plt.title('Zonas de peligro, direcciones del ataque', fontsize=14)
-st.write('Este gráfico busca representar cómo se distribuyeron los ataques del equipo contrario después de un cambio táctico del equipo seleccionado. Las zonas con mayor densidad de ataques, marcadas por el mapa de calor, indican las áreas donde el equipo rival pudo generar más peligro. Las líneas y etiquetas de distancia añaden una capa de detalle que permite interpretar mejor la relación entre el ataque y la estructura del campo')
+st.write('Este gráfico busca representar cómo se distribuyeron los ataques del equipo contrario a lo largo del primer tiempo. Las zonas con mayor densidad de ataques, marcadas por el mapa de calor, indican las áreas donde el equipo rival pudo generar más peligro. Las líneas y etiquetas de distancia añaden una capa de detalle que permite interpretar mejor la relación entre el ataque y la estructura del campo')
 st.pyplot(fig)
 
 # ---------------------------- TERCER GRÁFICO: Peligrosidad de las zonas conquistadas ----------------------------
@@ -807,7 +806,7 @@ plt.colorbar(scatter_abierto)
 
 ax.legend(loc='upper right')
 plt.title('Expected Goals (xG) por Ubicación de Tiros (Campo Completo - Medición 60 metros)', fontsize=14)
-st.write('Este análisis es útil para identificar las zonas del campo donde se originan los tiros más peligrosos, basados en los valores de xG. Específicamente, se puede observar si los cambios tácticos influyeron en la peligrosidad de las áreas de ataque del equipo o de su oponente. Las líneas de medición y etiquetas agregan contexto espacial, ayudando a comprender la relación entre las ubicaciones de los tiros y el campo.')
+st.write('Este análisis es útil para identificar las zonas del campo donde se originan los tiros más peligrosos en el primer tiempo, basados en los valores de xG. Específicamente, se puede observar si los cambios tácticos influyeron en la peligrosidad de las áreas de ataque del equipo o de su oponente. Las líneas de medición y etiquetas agregan contexto espacial, ayudando a comprender la relación entre las ubicaciones de los tiros y el campo.')
 st.pyplot(fig)
 
 ##------------- interno
@@ -895,7 +894,7 @@ st.markdown("⚽ ⚽ ⚽ ")
 
 st.header("")
 st.header("Resumen de la actividad ofensiva del contricante en el segundo tiempo", divider=True)
-st.write("Para terminar encontraremos los datos y graficos del resto del encuentro para analizar si funcionaron los ajustes implementados por el DT o si tu deducciones como usuario de esta APP fueron ideales o hubiesen marcado una diferrencia.")
+st.write("Para terminar encontraremos los datos y graficos del resto del encuentro para analizar si funcionaron los ajustes implementados por el DT o si tu deducciones como usuario de esta APP fueron ideales o hubiesen marcado una diferencia.")
 st.markdown(
     "<h4 style='color: red;'>Los gráficos muestran cómo fue atacado, no cómo ataco</h4>",
     unsafe_allow_html=True
@@ -961,7 +960,7 @@ cbar.set_ticks(bins)
 cbar.set_ticklabels([f'{b} m' for b in bins])
 cbar.set_label('Ganancia de metros hacia portería (rango)', fontsize=12)
 plt.title('Ganancia de metros hacia portería (rango)', fontsize=14)
-st.write('El gráfico muestra un mapa de calor que ilustra las zonas donde el equipo contrincante logró avanzar hacia la portería. Las áreas más oscuras representan zonas donde hubo mayor cantidad de metros ganados, indicando las áreas más peligrosas para el equipo seleccionado. El gráfico también incluye una barra de colores para mostrar diferentes rangos de metros ganados.')
+st.write('El gráfico muestra un mapa de calor que ilustra las zonas donde el equipo contrincante logró avanzar hacia la portería. Las áreas más oscuras representan zonas donde hubo mayor cantidad de metros ganados, indicando las áreas más peligrosas para el equipo seleccionado. El gráfico también incluye una barra de colores para mostrar diferentes rangos de metros ganados durante todo el encuentro.')
 st.pyplot(fig)
 
 # ---------------------------- SEGUNDO GRÁFICO: MAPA DE CALOR DIRECCIÓN UNIFICADA ----------------------------
@@ -1001,7 +1000,7 @@ for i in range(10, 40, 10):
     ax.text(2, 40 - i, f'{i}m', color='blue', fontsize=10)
 
 plt.title('Zonas de peligro, direccion del ataque', fontsize=14)
-st.write('Este gráfico busca representar cómo se distribuyeron los ataques del equipo contrario después de un cambio táctico del equipo seleccionado. Las zonas con mayor densidad de ataques, marcadas por el mapa de calor, indican las áreas donde el equipo rival pudo generar más peligro. Las líneas y etiquetas de distancia añaden una capa de detalle que permite interpretar mejor la relación entre el ataque y la estructura del campo')
+st.write('Este gráfico busca representar cómo se distribuyeron los ataques del equipo contrario durante todo el encuentro. Las zonas con mayor densidad de ataques, marcadas por el mapa de calor, indican las áreas donde el equipo rival pudo generar más peligro. Las líneas y etiquetas de distancia añaden una capa de detalle que permite interpretar mejor la relación entre el ataque y la estructura del campo')
 st.pyplot(fig)
 
 # ---------------------------- TERCER GRÁFICO: Peligrosidad de las zonas conquistadas ----------------------------
