@@ -105,11 +105,14 @@ st.latex(r'''
 \text{ganancia\_metros} = \sqrt{(x_{\text{final}} - x_{\text{inicio}})^2 + (y_{\text{final}} - y_{\text{inicio}})^2}
 ''')
 
+st.image("ganancia_metros.png")
+
+
 # Descripción para el gráfico 2
 st.markdown("""
 #### Zonas de Peligro y Direcciones del Ataque
             
-Este gráfico busca representar cómo se distribuyeron los ataques del equipo contrario después de un cambio táctico del equipo seleccionado. Las zonas con mayor densidad de ataques, marcadas por el mapa de calor, indican las áreas donde el equipo rival pudo generar más peligro. Las líneas y etiquetas de distancia añaden una capa de detalle que permite interpretar mejor la relación entre el ataque y la estructura del campo.
+Este gráfico busca representar cómo se distribuyeron los ataques del equipo contrario. Las zonas con mayor densidad de ataques, marcadas por el mapa de calor, indican las áreas donde el equipo rival pudo generar más peligro. Las líneas y etiquetas de distancia añaden una capa de detalle que permite interpretar mejor la relación entre el ataque y la estructura del campo.
             
 Este gráfico representa la densidad de los eventos ofensivos en función de su ubicación final, usando las columnas `location` y `pass_end_location` para determinar la dirección del ataque.
 """)
@@ -119,6 +122,8 @@ st.latex(r'''
 \text{dirección\_ataque} = \text{kde}(x_{\text{final}}, y_{\text{final}})
 ''')
 st.markdown("La densidad se calcula con la función de densidad de kernel (kde), mostrando las áreas de mayor actividad ofensiva.")
+
+st.image("zonas_de_peligro.png")
 
 # Descripción para el gráfico 3
 st.markdown("""
@@ -135,7 +140,10 @@ st.latex(r'''
 ''')
 st.markdown("La peligrosidad de una zona se define como la suma de los valores de **xG** de los tiros desde esa ubicación.")
 
+st.image("zonas_conquistadas.png")
+
 st.markdown("""
+            
 A continuación aparecerán todos los encuentros de la Euro 2024, para identificar qué escuadras realizaron cambios tácticos en la formación a lo largo del primer tiempo, con la finalidad de identificar cuáles encuentros tendrán en esta app un desglose de su táctica en la formación del primer tiempo:
 """)
 
