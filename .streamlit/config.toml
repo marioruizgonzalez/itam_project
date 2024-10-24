@@ -1,0 +1,8 @@
+# .streamlit/config.toml
+
+[theme]
+primaryColor = "#005200"       # Amarillo
+backgroundColor = "#ffffff"    # Fondo gris claro
+secondaryBackgroundColor = "#4ea93b"  # Azul para la barra lateral
+textColor = "#000000"          # Texto en negro como configuración predeterminada
+font = "sans serif"
