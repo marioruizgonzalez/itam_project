@@ -1,6 +1,6 @@
+wheel
 setuptools
 bcrypt==4.0.1
-cffi==1.15.1
 config==0.5.1
 contourpy==1.0.7
 cryptography==39.0.1
