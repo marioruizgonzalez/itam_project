@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Herramienta de análisis sobre la peligrosidad de las zonas conquistadas VS el parado táctico
 
 Este proyecto es una aplicación de Streamlit desarrollada para participar en el hackathon "ITAM Sport Analytics Conference 2024" con el equipo **Sheplays Analytics**.
@@ -14,31 +14,4 @@ Esta aplicación te servirá como apoyo para analizar encuentros de fútbol de l
 3. **Ajustes tácticos recomendados:** Recomendaciones sobre áreas del terreno de juego que requieren ajustes tácticos según el análisis.
 4. **Resumen de la actividad ofensiva del contrincante en el segundo tiempo:** Análisis del comportamiento del equipo rival y contraste de las decisiones tácticas del DT.
 
-**Nota importante:** Los gráficos están diseñados para analizar cómo el equipo está siendo atacado, por lo que las formaciones aparecen invertidas para facilitar la lectura desde esa perspectiva.
-=======
-# Streamlit App
-
-Este proyecto es una aplicación de Streamlit que puedes ejecutar localmente después de instalar las dependencias necesarias.
->>>>>>> af345e7798c7254a5457794abc30f016a4aefd98
-
-## Requisitos previos
-
-Asegúrate de tener instalado lo siguiente:
-
-- Python 3.7 o superior
-- pip (la herramienta de instalación de Python)
-
-## Instalación
-
-Sigue estos pasos para configurar y ejecutar la aplicación en tu entorno local:
-
-1. **Clona este repositorio:**
-
-   ```bash
-<<<<<<< HEAD
-   git clone git@github.com:marioruizgonzalez/itam_project.git
-   cd itam_project
-=======
-   git clone git@github.com:tu-usuario/tu-repositorio.git
-   cd tu-repositorio
->>>>>>> af345e7798c7254a5457794abc30f016a4aefd98
+##Nota importante: Los gráficos están diseñados para analizar cómo el equipo está siendo atacado, por lo que las formaciones aparecen invertidas para facilitar la lectura desde esa perspectiva.
