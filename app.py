@@ -250,78 +250,76 @@ def obtener_marcador_ht(match_id):
 
 def obtener_coordenadas_por_formacion(formacion):
     formaciones_dict = {
-    433: [(20, 80), (40, 80), (60, 80),   # Delanteros
-          (20, 60), (40, 60), (60, 60),   # Mediocampistas
-          (10, 40), (30, 40), (50, 40), (70, 40), # Defensas
-          (40, 20)],                      # Portero
-    442: [(25, 80), (55, 80),             # Delanteros
-          (10, 60), (30, 60), (50, 60), (70, 60), # Mediocampistas
-          (10, 40), (30, 40), (50, 40), (70, 40), # Defensas
-          (40, 20)],                      # Portero
-    4231: [(40, 85),                      # Delantero (centro)
-           (20, 70), (40, 70), (60, 70),  # Mediocampistas ofensivos (izquierda, centro, derecha)
-           (30, 55), (50, 55),            # Mediocentros defensivos
-           (15, 40), (35, 40), (55, 40), (75, 40),  # Defensas (laterales y centrales)
-           (40, 20)],                      # Portero (centro)
-    41212: [(30, 80), (50, 80),           # Delanteros (izquierda, derecha)
-            (40, 70),                     # Mediocentro ofensivo (centro)
-            (30, 60), (50, 60),           # Mediocentros (izquierda, derecha)
-            (40, 50),                     # Mediocentro defensivo (centro)
-            (20, 40), (60, 40),           # Laterales (izquierdo, derecho)
-            (30, 40), (50, 40),           # Defensas centrales
-            (40, 20)],                     # Portero (centro)
-    3412: [(40, 85),                      # Delantero (centro)
-           (30, 70), (50, 70),            # Mediocentros ofensivos (izquierdo y derecho)
-           (40, 60),                      # Mediocentro defensivo (centro)
-           (20, 65), (60, 65),            # Laterales (izquierdo y derecho)
-           (20, 40), (40, 40), (60, 40),  # Defensas (líbero y centrales)
-           (40, 20)],                      # Portero (centro)
-    352: [(40, 80),                       # Delantero
-          (30, 70), (50, 70),             # Mediocampistas ofensivos
-          (40, 55), (40, 50),             # Laterales
-          (20, 65), (60, 65),             # Defensas
-          (40, 20)],                      # Portero
-    3511: [(40, 80),                      # Delantero
-           (30, 70), (50, 70),            # Mediocampistas ofensivos
-           (40, 55),                      # Mediocentro defensivo
-           (20, 65), (60, 65),            # Laterales
-           (10, 40), (30, 40), (50, 40),  # Defensas
-           (40, 20)],                     # Portero
-    343: [(30, 85), (40, 85), (50, 85),   # Delanteros (izquierdo, central, derecho)
-          (20, 65), (60, 65),             # Laterales (izquierdo y derecho)
-          (30, 55), (50, 55),             # Mediocentros defensivos (izquierdo y derecho)
-          (20, 40), (40, 40), (60, 40),   # Defensas (izquierdo, central, derecho)
+        433: [(20, 80), (40, 80), (60, 80),   
+          (20, 60), (40, 60), (60, 60),   
+          (10, 40), (30, 40), (50, 40), (70, 40), 
+          (40, 20)],                      
+    442: [(25, 80), (55, 80),             
+          (10, 60), (30, 60), (50, 60), (70, 60), 
+          (10, 40), (30, 40), (50, 40), (70, 40), 
+          (40, 20)],                      
+    4231: [(40, 85),                      
+           (20, 70), (40, 70), (60, 70),  
+           (30, 55), (50, 55),            
+           (10, 40), (30, 40), (50, 40), (70, 40),  
+           (40, 20)],                      
+    41212: [(30, 80), (50, 80),           
+            (40, 70),                     
+            (30, 60), (50, 60),           
+            (40, 50),                     
+            (20, 40), (60, 40),           
+            (30, 40), (50, 40),           
+            (40, 20)],                     
+    3412: [
+            (30, 85), (50, 85),            
+            (40, 75),                     
+            (10, 60), (30, 60), (50, 60), (70, 60),           
+            (20 ,35), (40, 35), (65,35),                      
+            (40, 15)],                       
+    352: [
+          (30, 80), (50, 80),             
+          (10, 60), (25, 60), (40, 60), (55, 60), (70, 60), 
+          (20 ,35), (40, 35), (65,35), 
+          (40, 20)],
+    3511: [(40, 90),
+          (40, 80),             
+          (10, 60), (25, 60), (40, 60), (55, 60), (70, 60), 
+          (20 ,35), (40, 35), (65,35), 
           (40, 20)], 
-    4222: [(35, 80), (45, 80),            # Delanteros (izquierdo y derecho)
-           (25, 70), (55, 70),            # Mediocampistas ofensivos (izquierdo y derecho)
-           (35, 60), (45, 60),            # Mediocentros defensivos (izquierdo y derecho)
-           (20, 40), (60, 40),            # Defensas laterales (izquierdo y derecho)
-           (30, 40), (50, 40),            # Defensas centrales (izquierdo y derecho)
-           (40, 20)],                      # Portero (centro)
-    4141: [(40, 80),                      # Delantero
-           (30, 65), (50, 65),            # Mediocampistas ofensivos
-           (40, 55),                      # Mediocentro defensivo
-           (10, 40), (30, 40), (50, 40),  # Defensas
-           (40, 20)],                     # Portero
-     4411: [(40, 85),                      # Delantero (centro)
-           (40, 70),                      # Mediapunta (centro)
-           (20, 65), (60, 65),            # Mediocampistas laterales (izquierdo y derecho)
-           (30, 65), (50, 65),            # Mediocentros (izquierdo y derecho)
-           (20, 40), (60, 40),            # Defensas laterales (izquierdo y derecho)
-           (30, 40), (50, 40),            # Defensas centrales
-           (40, 20)],                      # Portero (centro)
-    451: [(40, 80),                       # Delantero
-          (30, 65), (50, 65), (30, 55), (50, 55),  # Mediocampistas ofensivos
-          (40, 45),                      # Mediocentro defensivo
-          (10, 40), (30, 40), (50, 40),  # Defensas
-          (40, 20)],                      # Portero
-    3421: [(40, 80),                      # Delantero (centro)
-           (30, 70), (50, 70),            # Mediocentros ofensivos (izquierda y derecha)
-           (20, 60), (60, 60),            # Carrileros (izquierdo y derecho)
-           (30, 55), (50, 55),            # Mediocentros (izquierdo y derecho)
-           (20, 40), (40, 40), (60, 40),  # Defensas (líbero y centrales)
-           (40, 20)]                      # Portero
-}
+    343: [(30, 85), (40, 85), (50, 85),   
+          (20, 65), (60, 65),             
+          (30, 55), (50, 55),             
+          (20, 40), (40, 40), (60, 40),   
+          (40, 20)], 
+    4222: [(35, 80), (45, 80),            
+           (25, 70), (55, 70),            
+           (35, 60), (45, 60),            
+           (20, 40), (60, 40),            
+           (30, 40), (50, 40),            
+           (40, 20)],                     
+    4141: [(40, 80),                      
+           (10, 65), (25, 65), (55, 65),(70, 65),  
+           (40, 55),                      
+           (10, 40), (25, 40), (55, 40),(70, 40),  
+           (40, 20)],                     
+     4411: [(40,95),                      
+           (40, 75),                      
+           (20, 65), (60, 65),            
+           (30, 65), (50, 65),            
+           (20, 40), (60, 40),            
+           (30, 40), (50, 40),            
+           (40, 20)],                     
+    451: [(40, 80),                      
+           (10, 65), (25, 65),(40, 65), (55, 65),(70, 65),  
+           (15, 40), (30, 40), (45, 40),(65, 40),  
+           (40, 20)],                     
+    3421: [(40, 80),                      
+           (30, 70), (50, 70),            
+           (20, 60), (60, 60),            
+           (30, 55), (50, 55),            
+           (20, 40), (40, 40), (60, 40),  
+           (40, 20)]                      
+    }
     return formaciones_dict.get(formacion, None)
 
 eventos = sb.events(match_id=partido_id)
@@ -385,78 +383,76 @@ st.markdown(
 
 def obtener_coordenadas_por_formacion(formacion):
     formaciones_dict = {
-    433: [(20, 80), (40, 80), (60, 80),   # Delanteros
-          (20, 60), (40, 60), (60, 60),   # Mediocampistas
-          (10, 40), (30, 40), (50, 40), (70, 40), # Defensas
-          (40, 20)],                      # Portero
-    442: [(25, 80), (55, 80),             # Delanteros
-          (10, 60), (30, 60), (50, 60), (70, 60), # Mediocampistas
-          (10, 40), (30, 40), (50, 40), (70, 40), # Defensas
-          (40, 20)],                      # Portero
-    4231: [(40, 85),                      # Delantero (centro)
-           (20, 70), (40, 70), (60, 70),  # Mediocampistas ofensivos (izquierda, centro, derecha)
-           (30, 55), (50, 55),            # Mediocentros defensivos
-           (15, 40), (35, 40), (55, 40), (75, 40),  # Defensas (laterales y centrales)
-           (40, 20)],                      # Portero (centro)
-    41212: [(30, 80), (50, 80),           # Delanteros (izquierda, derecha)
-            (40, 70),                     # Mediocentro ofensivo (centro)
-            (30, 60), (50, 60),           # Mediocentros (izquierda, derecha)
-            (40, 50),                     # Mediocentro defensivo (centro)
-            (20, 40), (60, 40),           # Laterales (izquierdo, derecho)
-            (30, 40), (50, 40),           # Defensas centrales
-            (40, 20)],                     # Portero (centro)
-    3412: [(40, 85),                      # Delantero (centro)
-           (30, 70), (50, 70),            # Mediocentros ofensivos (izquierdo y derecho)
-           (40, 60),                      # Mediocentro defensivo (centro)
-           (20, 65), (60, 65),            # Laterales (izquierdo y derecho)
-           (20, 40), (40, 40), (60, 40),  # Defensas (líbero y centrales)
-           (40, 20)],                      # Portero (centro)
-    352: [(40, 80),                       # Delantero
-          (30, 70), (50, 70),             # Mediocampistas ofensivos
-          (40, 55), (40, 50),             # Laterales
-          (20, 65), (60, 65),             # Defensas
-          (40, 20)],                      # Portero
-    3511: [(40, 80),                      # Delantero
-           (30, 70), (50, 70),            # Mediocampistas ofensivos
-           (40, 55),                      # Mediocentro defensivo
-           (20, 65), (60, 65),            # Laterales
-           (10, 40), (30, 40), (50, 40),  # Defensas
-           (40, 20)],                     # Portero
-    343: [(30, 85), (40, 85), (50, 85),   # Delanteros (izquierdo, central, derecho)
-          (20, 65), (60, 65),             # Laterales (izquierdo y derecho)
-          (30, 55), (50, 55),             # Mediocentros defensivos (izquierdo y derecho)
-          (20, 40), (40, 40), (60, 40),   # Defensas (izquierdo, central, derecho)
+        433: [(20, 80), (40, 80), (60, 80),   
+          (20, 60), (40, 60), (60, 60),   
+          (10, 40), (30, 40), (50, 40), (70, 40), 
+          (40, 20)],                      
+    442: [(25, 80), (55, 80),             
+          (10, 60), (30, 60), (50, 60), (70, 60), 
+          (10, 40), (30, 40), (50, 40), (70, 40), 
+          (40, 20)],                      
+    4231: [(40, 85),                      
+           (20, 70), (40, 70), (60, 70),  
+           (30, 55), (50, 55),            
+           (10, 40), (30, 40), (50, 40), (70, 40),  
+           (40, 20)],                      
+    41212: [(30, 80), (50, 80),           
+            (40, 70),                     
+            (30, 60), (50, 60),           
+            (40, 50),                     
+            (20, 40), (60, 40),           
+            (30, 40), (50, 40),           
+            (40, 20)],                     
+    3412: [
+            (30, 85), (50, 85),            
+            (40, 75),                     
+            (10, 60), (30, 60), (50, 60), (70, 60),           
+            (20 ,35), (40, 35), (65,35),                      
+            (40, 15)],                       
+    352: [
+          (30, 80), (50, 80),             
+          (10, 60), (25, 60), (40, 60), (55, 60), (70, 60), 
+          (20 ,35), (40, 35), (65,35), 
+          (40, 20)],
+    3511: [(40, 90),
+          (40, 80),             
+          (10, 60), (25, 60), (40, 60), (55, 60), (70, 60), 
+          (20 ,35), (40, 35), (65,35), 
           (40, 20)], 
-    4222: [(35, 80), (45, 80),            # Delanteros (izquierdo y derecho)
-           (25, 70), (55, 70),            # Mediocampistas ofensivos (izquierdo y derecho)
-           (35, 60), (45, 60),            # Mediocentros defensivos (izquierdo y derecho)
-           (20, 40), (60, 40),            # Defensas laterales (izquierdo y derecho)
-           (30, 40), (50, 40),            # Defensas centrales (izquierdo y derecho)
-           (40, 20)],                      # Portero (centro)
-    4141: [(40, 80),                      # Delantero
-           (30, 65), (50, 65),            # Mediocampistas ofensivos
-           (40, 55),                      # Mediocentro defensivo
-           (10, 40), (30, 40), (50, 40),  # Defensas
-           (40, 20)],                     # Portero
-     4411: [(40, 85),                      # Delantero (centro)
-           (40, 70),                      # Mediapunta (centro)
-           (20, 65), (60, 65),            # Mediocampistas laterales (izquierdo y derecho)
-           (30, 65), (50, 65),            # Mediocentros (izquierdo y derecho)
-           (20, 40), (60, 40),            # Defensas laterales (izquierdo y derecho)
-           (30, 40), (50, 40),            # Defensas centrales
-           (40, 20)],                      # Portero (centro)
-    451: [(40, 80),                       # Delantero
-          (30, 65), (50, 65), (30, 55), (50, 55),  # Mediocampistas ofensivos
-          (40, 45),                      # Mediocentro defensivo
-          (10, 40), (30, 40), (50, 40),  # Defensas
-          (40, 20)],                      # Portero
-    3421: [(40, 80),                      # Delantero (centro)
-           (30, 70), (50, 70),            # Mediocentros ofensivos (izquierda y derecha)
-           (20, 60), (60, 60),            # Carrileros (izquierdo y derecho)
-           (30, 55), (50, 55),            # Mediocentros (izquierdo y derecho)
-           (20, 40), (40, 40), (60, 40),  # Defensas (líbero y centrales)
-           (40, 20)]                      # Portero
-}
+    343: [(30, 85), (40, 85), (50, 85),   
+          (20, 65), (60, 65),             
+          (30, 55), (50, 55),             
+          (20, 40), (40, 40), (60, 40),   
+          (40, 20)], 
+    4222: [(35, 80), (45, 80),            
+           (25, 70), (55, 70),            
+           (35, 60), (45, 60),            
+           (20, 40), (60, 40),            
+           (30, 40), (50, 40),            
+           (40, 20)],                     
+    4141: [(40, 80),                      
+           (10, 65), (25, 65), (55, 65),(70, 65),  
+           (40, 55),                      
+           (10, 40), (25, 40), (55, 40),(70, 40),  
+           (40, 20)],                     
+     4411: [(40,95),                      
+           (40, 75),                      
+           (20, 65), (60, 65),            
+           (30, 65), (50, 65),            
+           (20, 40), (60, 40),            
+           (30, 40), (50, 40),            
+           (40, 20)],                     
+    451: [(40, 80),                      
+           (10, 65), (25, 65),(40, 65), (55, 65),(70, 65),  
+           (15, 40), (30, 40), (45, 40),(65, 40),  
+           (40, 20)],                     
+    3421: [(40, 80),                      
+           (30, 70), (50, 70),            
+           (20, 60), (60, 60),            
+           (30, 55), (50, 55),            
+           (20, 40), (40, 40), (60, 40),  
+           (40, 20)]                      
+    }
     return formaciones_dict.get(formacion, None)
 
 eventos = sb.events(match_id=partido_id)
