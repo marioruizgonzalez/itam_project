@@ -14,4 +14,4 @@ Esta aplicación te servirá como apoyo para analizar encuentros de fútbol de l
 3. **Ajustes tácticos recomendados:** Recomendaciones sobre áreas del terreno de juego que requieren ajustes tácticos según el análisis.
 4. **Resumen de la actividad ofensiva del contrincante en el segundo tiempo:** Análisis del comportamiento del equipo rival y contraste de las decisiones tácticas del DT.
 
-##Nota importante: Los gráficos están diseñados para analizar cómo el equipo está siendo atacado, por lo que las formaciones aparecen invertidas para facilitar la lectura desde esa perspectiva.
+Nota importante: Los gráficos están diseñados para analizar cómo el equipo está siendo atacado, por lo que las formaciones aparecen invertidas para facilitar la lectura desde esa perspectiva.
